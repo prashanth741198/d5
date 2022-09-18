@@ -38,7 +38,7 @@ steps:
         "files": [
           {
             "pattern": "*.war",
-            "target": "artifactory-build-info/"
+            "target": "prash-generic-local/"
           }
         ]
       }

@@ -20,3 +20,21 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+- task: CopyFiles@2
+  inputs:
+    Contents: '**/*.war'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+- task: ArtifactoryGenericUpload@2
+  inputs:
+    artifactoryService: 'JfrogServiceConnection'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "*war",
+            "target": "prash-generic-local/"
+          }
+        ]
+      }
+    failNoOp: true
